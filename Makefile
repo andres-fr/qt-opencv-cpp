@@ -45,8 +45,8 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = source.cpp 
-OBJECTS       = source.o
+SOURCES       = webcam.cpp 
+OBJECTS       = webcam.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/shell-unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -113,7 +113,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		project.pro source.cpp
+		project.pro webcam.cpp
 QMAKE_TARGET  = testbin
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = testbin
@@ -294,7 +294,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/testbin1.0.0 || mkdir -p .tmp/testbin1.0.0
-	$(COPY_FILE) --parents $(DIST) .tmp/testbin1.0.0/ && $(COPY_FILE) --parents source.cpp .tmp/testbin1.0.0/ && (cd `dirname .tmp/testbin1.0.0` && $(TAR) testbin1.0.0.tar testbin1.0.0 && $(COMPRESS) testbin1.0.0.tar) && $(MOVE) `dirname .tmp/testbin1.0.0`/testbin1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/testbin1.0.0
+	$(COPY_FILE) --parents $(DIST) .tmp/testbin1.0.0/ && $(COPY_FILE) --parents source.cpp .tmp/testbin1.0.0/ && $(COPY_FILE) --parents webcam.cpp .tmp/testbin1.0.0/ && (cd `dirname .tmp/testbin1.0.0` && $(TAR) testbin1.0.0.tar testbin1.0.0 && $(COMPRESS) testbin1.0.0.tar) && $(MOVE) `dirname .tmp/testbin1.0.0`/testbin1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/testbin1.0.0
 
 
 clean:compiler_clean 
@@ -333,8 +333,8 @@ compiler_clean:
 
 ####### Compile
 
-source.o: source.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o source.o source.cpp
+webcam.o: webcam.cpp source.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o webcam.o webcam.cpp
 
 ####### Install
 

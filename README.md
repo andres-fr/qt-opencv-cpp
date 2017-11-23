@@ -1,6 +1,6 @@
 ## STEPS TO FOLLOW TO COMPILE AND RUN A MINIMAL EXAMPLE:
 
-This is somewhat an excerpt of this webpage: `http://doc.qt.io/qt-5/designer-using-a-ui-file.html`
+References: `http://doc.qt.io/qt-5/designer-using-a-ui-file.html`, `https://doc.qt.io/archives/2.3/designer/chap2_3.html`
 
 1. Run the QT designer (on debian `designer`), make your design and save it to `<DESIGN>.ui`
 2. Convert the design to C++: `uic -o <SOURCE>.h <DESIGN>.ui`

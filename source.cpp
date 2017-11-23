@@ -102,15 +102,6 @@ namespace Ui {
     public Ui_MainWindow {};
 } // namespace Ui
 
-int main(int argc, char** argv){
-    QApplication app(argc, argv);
-    QMainWindow* q = new QMainWindow;
-    Ui::MainWindow ui;
-    ui.setupUi(q);
-    q->show();
-    return app.exec();
-}
-
 QT_END_NAMESPACE
 
 #endif // SOURCE_H
