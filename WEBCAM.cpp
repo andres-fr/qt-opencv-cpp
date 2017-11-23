@@ -3,8 +3,8 @@
 // pressing ESC.
 
 
-// make all and run with:
-// uic -o design.h DESIGN.ui && echo -e "SOURCES += WEBCAM.cpp\nHEADERS += design.h\nCONFIG += c++11\nTARGET = webcam\nQT += widgets" > webcam.pro && qmake webcam.pro && make && ./webcam
+// Render, Compile and run with:
+// uic -o design.h design.ui && echo -e "SOURCES += webcam.cpp\nHEADERS += design.h\nCONFIG += c++11\nTARGET = build/webcam\nQT += widgets" > build/webcam.pro && qmake build/webcam.pro && make && ./build/webcam
 
 // LIBRARY INCLUDES
 #include <opencv2/opencv.hpp>
@@ -19,7 +19,6 @@ QImage Mat2QImage(cv::Mat const& cvmat){
 
 
 int main(int argc, char** argv){
-
   QApplication app(argc, argv);
   QMainWindow* q = new QMainWindow;
   Ui::MainWindow ui;

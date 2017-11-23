@@ -2,9 +2,9 @@
 
 References: `http://doc.qt.io/qt-5/designer-using-a-ui-file.html`, `https://doc.qt.io/archives/2.3/designer/chap2_3.html`
 
-1. Run the QT designer (on debian `designer`), make your design and save it to `<DESIGN>.ui`
-2. Convert the design to C++: `uic -o <SOURCE>.h <DESIGN>.ui`
-3. Include it to other files as `#include "<SOURCE>.h"`, or make it standalone adding a main function to it before `QT_END_NAMESPACE`:
+1. Run the QT designer (on debian `designer`), make your design and save it to `DESIGN.ui`
+2. Convert the design to C++: `uic -o design.h DESIGN.ui`
+3. Include it to other files like `<SOURCE>.cpp` with `#include "design.h"`. The minimal example would include such a main function:
 
 ```
 int main(int argc, char** argv){
@@ -16,17 +16,25 @@ int main(int argc, char** argv){
     return app.exec();
 }
 ```
-
-4. QT projects are best compiled via `qmake`. Qmake requires a `<PROJECT>.pro` file, which can look like this:
+4. QT projects are best compiled via `qmake`. Qmake requires a `<PROJECT>.pro` project file, which can look like this:
 
 ```
 SOURCES += <SOURCE>.cpp
+HEADERS += design.h
 CONFIG += c++11
 TARGET = <BINARY_NAME>
 QT += widgets
+
 ```
 
-5. Run `qmake project.pro && make && ./<BINARY_NAME>` to premake, make and run the GUI. It should open the designed window. Done!
+5. Run `qmake <PROJECT>.pro && make && ./<BINARY_NAME>` to premake, make and run the GUI. It should open the designed window. Done!
+
+
+For the webcam project, this can be compressed in the following actions:
+
+1. run `designer DESIGN.ui` and make the desired changes
+2. include `design.h` and a proper main function in `WEBCAM.cpp` with the desired functionality.
+3. make all and run with: `uic -o design.h DESIGN.ui && echo -e "SOURCES += WEBCAM.cpp\nHEADERS += design.h\nCONFIG += c++11\nTARGET = webcam\nQT += widgets" > webcam.pro && qmake webcam.pro && make && ./webcam`
 
 ## FURTHER DO:
 
