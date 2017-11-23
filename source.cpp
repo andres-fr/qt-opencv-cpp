@@ -9,7 +9,6 @@
 #ifndef SOURCE_H
 #define SOURCE_H
 
-#include<iostream>
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
@@ -99,12 +98,25 @@ public:
 };
 
 namespace Ui {
-    class MainWindow: public Ui_MainWindow {};
+    class MainWindow:
+    public Ui_MainWindow {};
 } // namespace Ui
 
-
-int main(){std::cout << "hello qt!!" << std::endl;}
+int main(int argc, char** argv){
+    QApplication app(argc, argv);
+    QMainWindow* q = new QMainWindow;
+    Ui::MainWindow ui;
+    ui.setupUi(q);
+    q->show();
+    return app.exec();
+}
 
 QT_END_NAMESPACE
 
 #endif // SOURCE_H
+
+
+// class Ui_MainWindow{
+// public:
+//     void setupUi(QMainWindow *MainWindow)
+//       void retranslateUi(QMainWindow *MainWindow)

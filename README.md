@@ -1,24 +1,32 @@
 ## STEPS TO FOLLOW TO COMPILE AND RUN A MINIMAL EXAMPLE:
 
+This is somewhat an excerpt of this webpage: `http://doc.qt.io/qt-5/designer-using-a-ui-file.html`
+
 1. Run the QT designer (on debian `designer`), make your design and save it to `<DESIGN>.ui`
-2. Convert the design to C++: `uic -o <SOURCE>.cpp <DESIGN>.ui`
-3. make it standalone as follows:
-   1. Add a `#include<iostream>` declaration
-   2. Add `int main(){std::cout << "hello qt!!" << std::endl;}` before `QT_END_NAMESPACE`
+2. Convert the design to C++: `uic -o <SOURCE>.h <DESIGN>.ui`
+3. Include it to other files as `#include "<SOURCE>.h"`, or make it standalone adding a main function to it before `QT_END_NAMESPACE`:
+
+```
+int main(int argc, char** argv){
+    QApplication app(argc, argv);
+    QMainWindow* q = new QMainWindow;
+    Ui::MainWindow ui;
+    ui.setupUi(q);
+    q->show();
+    return app.exec();
+}
+```
+
 4. QT projects are best compiled via `qmake`. Qmake requires a `<PROJECT>.pro` file, which can look like this:
 
 ```
-
 SOURCES += <SOURCE>.cpp
 CONFIG += c++11
 TARGET = <BINARY_NAME>
-
+QT += widgets
 ```
 
-5. Run `qmake <PROJECT>.pro` to generate the `Makefile` in the same folder
-6. Run `make` to compile the program
-7. Run `./<BINARY_NAME>` should output `"hello qt!!` to the console. Done!
-
+5. Run `qmake project.pro && make && ./<BINARY_NAME>` to premake, make and run the GUI. It should open the designed window. Done!
 
 ## FURTHER DO:
 
