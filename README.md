@@ -34,11 +34,17 @@ For the webcam project, this can be compressed in the following actions:
 
 1. run `designer DESIGN.ui` and make the desired changes
 2. include `design.h` and a proper main function in `WEBCAM.cpp` with the desired functionality.
-3. make all and run with: `uic -o design.h DESIGN.ui && echo -e "SOURCES += WEBCAM.cpp\nHEADERS += design.h\nCONFIG += c++11\nTARGET = webcam\nQT += widgets" > webcam.pro && qmake webcam.pro && make && ./webcam`
+3. make all and run with: `uic -o design.h design.ui && echo -e "SOURCES += webcam.cpp\nHEADERS += design.h\nCONFIG += c++11\nTARGET = build/webcam\nQT += widgets" > build/webcam.pro && qmake build/webcam.pro && make && ./build/webcam`
 
 ## FURTHER DO:
 
-In a more complex setup, the generated source file doesn't need a main function since it is included to other sources which can also incorporate further libraries and interact with Qt. For example, interacting with OpenCV2  would look similar to this (TODO: test that it works with qt5):
+In a more complex setup, the generated source file doesn't need a main function since it is included to other sources which can also incorporate further libraries and interact with Qt. For example, interacting with OpenCV2  would need the following line in the project file:
+
+```
+LIBS += `pkg-config --cflags --libs opencv`
+```
+
+look similar to this (TODO: test that it works with qt5):
 
 ```
 #include <opencv2/opencv.hpp>
@@ -57,7 +63,7 @@ int main(){
 
 ```
 
-Compile with `g++ -std=c++11 -Wall -Wextra <SOURCES> `pkg-config --cflags --libs opencv QtCore QtGui`  -o test && ./test` (test that it works with qt5)
+Compile with ``uic -o design.h DESIGN.ui && echo -e "SOURCES += WEBCAM.cpp\nHEADERS += design.h\nCONFIG += c++11\nTARGET = webcam\nQT += widgets gui\nLIBS += \`pkg-config --cflags --libs opencv\`" > webcam.pro && qmake webcam.pro && make clean && make && ./webcam`` 
 
 
 
