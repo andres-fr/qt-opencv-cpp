@@ -40,6 +40,27 @@
 //
 #include <QtGui/QPixmap>
 #include <QtCore/QTimer>
+//
+#include <GL/glut.h>
+
+
+class Test : public QObject {
+  Q_OBJECT
+private slots:
+  void update(){
+  }
+public:
+  Test(){
+  }
+  QPixmap getX(){
+
+  }
+}
+
+
+
+
+
 
 
 
@@ -50,7 +71,6 @@
 class QtWebCam : public QObject, public Ui::MainWindow{
 
   Q_OBJECT // needed by every QObject that uses slots
-
 
 private slots: // this slot can be used in the QObject::connect method
   void update(){

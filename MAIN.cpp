@@ -4,8 +4,7 @@
 
 
 // PIPELINE:
-// mkdir -p build && uic -o build/design.h DESIGN.ui && echo -e "VPATH += VPATH += ../\nSOURCES += MAIN.cpp\nHEADERS += build/design.h include/webcam.h\nCONFIG += c++11\nTARGET = bin/main\nQT += widgets gui\nLIBS += \`pkg-config --cflags --libs opencv\`" > build/main.pro && qmake build/main.pro -o build/Makefile && make -C build/ clean && make -C build/ && build/bin/main
-
+// mkdir -p build && uic -o build/design.h DESIGN.ui && echo -e "VPATH += VPATH += ../\nSOURCES += MAIN.cpp\nHEADERS += build/design.h include/webcam.h\nCONFIG += c++11\nTARGET = bin/main\nQT += widgets gui charts\nLIBS += \`pkg-config --cflags --libs opencv\`" > build/main.pro && qmake build/main.pro -o build/Makefile && make -C build/ clean && make -C build/ && build/bin/main
 
 
 #include "include/webcam.h"
