@@ -1,7 +1,29 @@
 // This file contains two classes:
 // - QtWebCam: grabs video from a webcam via OpenCV and shows it on a Qt GUI
 // - CvWebCam: minimal class that grabs and shows webcam using just OpenCV
-
+// And can be run with the following main.cpp:
+//
+// #include "include/webcam.h"
+// int main(int argc, char** argv){
+//   const bool kWithCV = true;
+//   if(kWithCV)
+//     { // The plain OpenCV version (test/debug)
+//       CvWebCam cam;
+//       cam.start();
+//       return 0;
+//     }
+//   else
+//     { // The OpenCV+Qt integrated version
+//       // instantiate QT application and main window
+//       QApplication app(argc, argv);
+//       QMainWindow* window = new QMainWindow;
+//       // assign our QtWebCam to the main window
+//       QtWebCam cam(window);
+//       // show the window and start main loop!
+//       window->show();
+//       return app.exec();
+//     }
+// }
 
 #ifndef WEBCAM_H
 #define WEBCAM_H
