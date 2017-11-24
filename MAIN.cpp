@@ -11,6 +11,9 @@
 #include "include/webcam.h"
 
 int main(int argc, char** argv){
+  // lets add some barcharts!
+
+
   // The OpenCV+Qt integrated version
   // instantiate QT application and main window
   QApplication app(argc, argv);
