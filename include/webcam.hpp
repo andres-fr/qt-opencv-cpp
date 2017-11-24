@@ -31,8 +31,6 @@
 // STL INCLUDES
 #include <iostream>
 #include <stdexcept>
-// LOCAL INCLUDES
-#include "design.h"
 // LIBRARY INCLUDES
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -40,27 +38,11 @@
 //
 #include <QtGui/QPixmap>
 #include <QtCore/QTimer>
-//
-#include <GL/glut.h>
+// LOCAL INCLUDES
+#include "design.h"
 
 
-class Test : public QObject {
-  Q_OBJECT
-private slots:
-  void update(){
-  }
-public:
-  Test(){
-  }
-  QPixmap getX(){
-
-  }
-}
-
-
-
-
-
+////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -72,19 +54,18 @@ class QtWebCam : public QObject, public Ui::MainWindow{
 
   Q_OBJECT // needed by every QObject that uses slots
 
-private slots: // this slot can be used in the QObject::connect method
-  void update(){
-    QPixmap pixmap = grabPixmap();
-    setPixmapScaled(this->label, pixmap);
-    setPixmapScaled(this->label_2, pixmap);
+protected slots: // this slot can be used in the QObject::connect method
+  void updateCam(){
+    QPixmap cam_pixmap = grabPixmap();
+    setPixmapScaled(this->label, cam_pixmap);
   }
 
-private:
+protected:
+  QPixmap* current_pixmap_;
   QMainWindow* window_;
   cv::VideoCapture cv_cam_;
   cv::Mat cv_mat_;
   QTimer timer_;
-
   // Fills the label with the pixmap without altering the image proportions
   void setPixmapScaled(QLabel* lbl, const QPixmap &pix){
     lbl->setPixmap(pix.scaled(lbl->size(),
@@ -99,19 +80,21 @@ public:
   // 3) sets a trigger that refreshes the "label" widget with the cam contents
   //    at the given rate in miliseconds (0 means as fast as possible).
   QtWebCam(QMainWindow* w, const size_t cam_idx=0, const size_t refresh_ms=0)
-    : window_(w), cv_cam_(cam_idx){ // init list tries to open cam stream
-    if (!cv_cam_.isOpened()) {      // an error will be thrown else
+    : current_pixmap_(NULL),
+      window_(w),
+      cv_cam_(cam_idx){ // tries to open cam stream
+    if (!cv_cam_.isOpened()) { // throw error if cam stream couldn't open
       throw std::runtime_error("[ERROR] QtWebCam: CV can't open camera");
     }
     // the inherited setup method populates the window with the widgets
     this->setupUi(w);
     // This connection+timer is responsible for refreshing the cam
-    QObject::connect(&timer_, SIGNAL(timeout()), this, SLOT(update()));
+    QObject::connect(&timer_, SIGNAL(timeout()), this, SLOT(updateCam()));
     timer_.start(refresh_ms);
     // // This fills the label with the image altering the scale
     //  this->label->setScaledContents(true);
     // updating in the constrctor makes the app start much faster (no idea why)
-    update();
+    updateCam();
   }
 
   // This method grabs a single, current frame from the cam stream opened

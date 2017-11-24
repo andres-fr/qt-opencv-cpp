@@ -7,13 +7,13 @@
 ```
 mkdir -p build
 uic -o build/design.h DESIGN.ui
-echo -e "VPATH += VPATH += ../\nSOURCES += MAIN.cpp\nHEADERS += build/design.h include/webcam.h\nCONFIG += c++11\nTARGET = bin/main\nQT += widgets gui\nLIBS += \`pkg-config --cflags --libs opencv\`" > build/main.pro
+echo -e "VPATH += VPATH += ../\nSOURCES += MAIN.cpp\nHEADERS += build/design.h include/webcam.hpp include/barchart.hpp include/integrated_gui.hpp\nCONFIG += c++11\nTARGET = bin/main\nQT += widgets gui\nLIBS += \`pkg-config --cflags --libs opencv\`" > build/main.pro
 qmake build/main.pro -o build/Makefile
 make -C build/ clean
 make -C build/
 build/bin/main
 ```
- Or alternatively, cross your fingers and do it all in one line! ``mkdir -p build && uic -o build/design.h DESIGN.ui && echo -e "VPATH += VPATH += ../\nSOURCES += MAIN.cpp\nHEADERS += build/design.h include/webcam.h\nCONFIG += c++11\nTARGET = bin/main\nQT += widgets gui\nLIBS += \`pkg-config --cflags --libs opencv\`" > build/main.pro && qmake build/main.pro -o build/Makefile && make -C build/ clean && make -C build/ && build/bin/main``
+ Or alternatively, cross your fingers and do it all in one line! ``mkdir -p build && uic -o build/design.h DESIGN.ui && echo -e "VPATH += VPATH += ../\nSOURCES += MAIN.cpp\nHEADERS += build/design.h include/webcam.hpp include/barchart.hpp include/integrated_gui.hpp\nCONFIG += c++11\nTARGET = bin/main\nQT += widgets gui\nLIBS += \`pkg-config --cflags --libs opencv\`" > build/main.pro && qmake build/main.pro -o build/Makefile && make -C build/ clean && make -C build/ && build/bin/main``
  
  ## EXPLANATION:
  
