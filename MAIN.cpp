@@ -2,11 +2,10 @@
 // connected cam and shows it in a window. Stop
 // pressing ESC.
 
-// just compile and run:
-//  qmake webcam.pro && make clean && make && ./webcam
 
-// Render, Compile and run with:
-// uic -o design.h DESIGN.ui && echo -e "SOURCES += WEBCAM.cpp\nHEADERS += design.h webcam.h\nCONFIG += c++11\nTARGET = webcam\nQT += widgets gui\nLIBS += \`pkg-config --cflags --libs opencv\`" > webcam.pro && qmake webcam.pro && make clean && make && ./webcam
+// PIPELINE:
+// mkdir -p build && uic -o build/design.h DESIGN.ui && echo -e "VPATH += VPATH += ../\nSOURCES += MAIN.cpp\nHEADERS += build/design.h include/webcam.h\nCONFIG += c++11\nTARGET = bin/main\nQT += widgets gui\nLIBS += \`pkg-config --cflags --libs opencv\`" > build/main.pro && qmake build/main.pro -o build/Makefile && make -C build/ && build/bin/main
+
 
 // STL INCLUDES
 #include <iostream>
@@ -19,7 +18,7 @@
 // #include "design.h"
 // #include <QtGui/QPixmap>
 // #include <QtCore/QTimer>
-#include "webcam.h"
+#include "include/webcam.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -45,12 +44,6 @@ struct CvCamTest{
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////
 /// MAIN ROUTINE
 // int main(){CvCamTest x; x.start(); return 0;}
 ////////////////////////////////////////////////////////////////////////////////
@@ -63,11 +56,6 @@ int main(int argc, char** argv){
 
   // start the webcam QT app on the main window
   WebCam ui(window);//, cam_stream);
-
-  // // connect
-  // QTimer timer;
-  // QObject::connect(&timer, SIGNAL(timeout()), ui.checkBox, SLOT(ui.checkBox->toggle()));  timer.start(500);
-
 
   // run QTApp
   ui.label->setPixmap(ui.grabPixmap());
