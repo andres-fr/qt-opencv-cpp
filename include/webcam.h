@@ -51,14 +51,25 @@ class QtWebCam : public QObject, public Ui::MainWindow{
 
   Q_OBJECT // needed by every QObject that uses slots
 
+
 private slots: // this slot can be used in the QObject::connect method
-  void update(){this->label->setPixmap(grabPixmap());}
+  void update(){
+    QPixmap pixmap = grabPixmap();
+    setPixmapScaled(this->label, pixmap);
+    setPixmapScaled(this->label_2, pixmap);
+  }
 
 private:
   QMainWindow* window_;
   cv::VideoCapture cv_cam_;
   cv::Mat cv_mat_;
   QTimer timer_;
+
+  // Fills the label with the pixmap without altering the image proportions
+  void setPixmapScaled(QLabel* lbl, const QPixmap &pix){
+    lbl->setPixmap(pix.scaled(lbl->size(),
+                              Qt::KeepAspectRatio, Qt::SmoothTransformation));
+  }
 
 public:
   // Constructor: given a reference to a QT window, an index for OpenCV to
@@ -77,8 +88,10 @@ public:
     // This connection+timer is responsible for refreshing the cam
     QObject::connect(&timer_, SIGNAL(timeout()), this, SLOT(update()));
     timer_.start(refresh_ms);
-    // This line makes the app start much faster (no idea why)
-    this->label->setPixmap(grabPixmap());
+    // // This fills the label with the image altering the scale
+    //  this->label->setScaledContents(true);
+    // updating in the constrctor makes the app start much faster (no idea why)
+    update();
   }
 
   // This method grabs a single, current frame from the cam stream opened

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>894</width>
-    <height>650</height>
+    <width>924</width>
+    <height>792</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -24,47 +24,16 @@
     <item row="0" column="0">
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QCheckBox" name="checkBox">
-        <property name="minimumSize">
-         <size>
-          <width>284</width>
-          <height>26</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>CheckBox</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QLabel" name="label">
-        <property name="minimumSize">
-         <size>
-          <width>352</width>
-          <height>287</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>283</width>
-          <height>16777215</height>
-         </size>
-        </property>
         <property name="text">
          <string>TextLabel</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="radioButton">
-        <property name="minimumSize">
-         <size>
-          <width>284</width>
-          <height>26</height>
-         </size>
-        </property>
+       <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>hello</string>
+         <string>TextLabel</string>
         </property>
        </widget>
       </item>
@@ -77,7 +46,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>894</width>
+     <width>924</width>
      <height>27</height>
     </rect>
    </property>
